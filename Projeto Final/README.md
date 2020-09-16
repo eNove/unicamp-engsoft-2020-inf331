@@ -1,4 +1,4 @@
-# Projeto: `Ranqueamento por avaliação de Fornecedores e Leilão invertido`
+`Ranqueamento por Avaliação de Fornecedores e Leilão invertido`
 
 # Equipe
 * eNove
