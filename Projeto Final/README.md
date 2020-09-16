@@ -1,4 +1,4 @@
-# Projeto `<Título>`
+# Projeto: `Ranqueamento por avaliação de Fornecedores e Leilão invertido`
 
 # Equipe
 * eNove
