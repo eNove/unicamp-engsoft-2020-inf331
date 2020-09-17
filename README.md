@@ -16,3 +16,4 @@ Para ver mais iformações sobre a matéria veja o documento:
 # Laboratórios
 
 - [Lab 03](lab03/)
+- [Projeto Final](Projeto Final/)
