@@ -11,7 +11,7 @@ Apresente aqui o detalhamento do Nível 1 conforme detalhado na especificação 
 
 Apresente um diagrama conforme o modelo a seguir:
 
-> ![Modelo de diagrama no nível 1](images/coreografia.png)
+> ![Modelo de diagrama no nível 1](images/barramento_nivel1.png)
 
 ### Detalhamento da interação de componentes
 
