@@ -53,36 +53,53 @@ Apresente um diagrama conforme o modelo a seguir:
 
 ![Componente](diagrama-componente-mensagens.png)
 
+## A seguir temos as interfaces uitlizadas:
 
-> * Listagem das interfaces.
+### Interface IGerenteLeilao
 
-## As interfaces listadas são detalhadas a seguir:
+Interface para envio de dados do pedido com itens associados.
 
-## Detalhamento das Interfaces
-
-### Interface `<nome da interface>`
-
-> Resumo do papel da interface.
-
-**Tópico**: `<tópico que a respectiva interface assina ou publica>`
+**Tópico**: `pedido/{id}/dados`
 
 Classes que representam objetos JSON associados às mensagens da interface:
 
 ![Diagrama Classes REST](images/diagrama-classes-rest.png)
 
 ~~~json
-<Formato da mensagem JSON associada ao objeto enviado/recebido por essa interface.>
+{
+  "number": 16,
+  "duoDate": "2009-10-04",
+  "total": 1937.01,
+  "items": {
+    "item": {
+       "itemid": "1245",
+       "quantity": 1
+    },
+    "item": {
+       "itemid": "1321",
+       "quantity": 1
+    }
+  }  
+}
 ~~~
 
 Detalhamento da mensagem JSON:
 
+**Order**
 Atributo | Descrição
 -------| --------
-`<nome do atributo>` | `<objetivo do atributo>`
+number | número do pedido
+duoDate | data de vencimento
+total | valor total do pedido
+items | itens do pedido
 
-## Exemplo
+**Item**
+Atributo | Descrição
+-------| --------
+itemid | identificador do item
+quantity | quantidade do item
 
-### Interface DadosPedido
+### Interface ILance
 
 Interface para envio de dados do pedido com itens associados.
 
