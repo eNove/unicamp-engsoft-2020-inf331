@@ -129,7 +129,7 @@ Classes que representam objetos JSON associados às mensagens da interface:
 
 Detalhamento da mensagem JSON:
 
-**Order**
+**Oferta**
 Atributo | Descrição
 -------| --------
 number | número do pedido
@@ -175,7 +175,7 @@ Classes que representam objetos JSON associados às mensagens da interface:
 
 Detalhamento da mensagem JSON:
 
-**Order**
+**Lance**
 Atributo | Descrição
 -------| --------
 number | número do pedido
