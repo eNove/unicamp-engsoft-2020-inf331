@@ -17,8 +17,11 @@ Apresente um diagrama conforme o modelo a seguir:
 
 O detalhamento deve seguir um formato de acordo com o exemplo a seguir:
 
-* O componente `Leilao` inicia o leilão publicando no barramento a mensagem de tópico "`idUsuario/idLeilao/produtoDesejado`" através da interface `IGerenteLeilao` que interage com os componentes `Comprador` e `Produto`, iniciando assim o monitoramento deste topico no barramento.
-* O compomente `Fornecedor` assina no barramento mensagens de tópico "`leilão/idLeilao/início`" através da interface `IParticipaLeilao`. Quando recebe uma mensagem o componente subscreve o topico e por sua vez o inicia sua participação do leilão publicando ao componente `Comprador`.
+1. O Componente `Leilao` lê o tópico "`produtoDesejado/idLeilao`" para verificar se já existe algum leilão para aquele produto. 
+1. O componente `Leilao` inicia o leilão publicando no barramento a mensagem de tópico "`produtoDesejado/idLeilao/idUsuario`" através da interface `IGerenteLeilao`.
+1. Os componentes `Comprador` e `Produto`, também assinam o barramento para "`produtoDesejado/idLeilao/idUsuario`" iniciando assim o monitoramento deste tópico e a Interação entre `Leilao`, `Comprador` e `Produto`.
+1. O compomente `Fornecedor` assina no barramento mensagens de tópico "`leilão/idLeilao/início`" através da interface `IParticipaLeilao`. 
+1. Quando `Fornecedor` recebe uma mensagem no tópico "`leilão/idLeilao/início`" o componente subscreve o outro tópico "`idUsuario/idLeilao/produtoDesejado`" e por sua vez inicia sua participação do leilão publicando ao componente `Comprador`.
 
 Para cada componente será apresentado um documento conforme o modelo a seguir:
 
