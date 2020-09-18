@@ -54,10 +54,9 @@ Apresente um diagrama conforme o modelo a seguir:
 ![Componente](diagrama-componente-mensagens.png)
 
 
-**Interfaces**
-> * Listagem das interfaces do componente.
+> * Listagem das interfaces.
 
-As interfaces listadas são detalhadas a seguir:
+## As interfaces listadas são detalhadas a seguir:
 
 ## Detalhamento das Interfaces
 
