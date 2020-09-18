@@ -20,18 +20,18 @@ Apresente um diagrama conforme o modelo a seguir:
 
 ### Detalhamento da interação de componentes
 
-1. O componente `Comprador` publica o tópico "`/leilao/idUsuario/produtoDesejado`" pela interface **IGerenteLeilao** que é subscrito pelo componente `Leilao`. Desta forma, há demonstração de interesse de um comprador por um produto;
-2. O componente `Leilao` publica o tópico "`/leilao/idLeilao/buscaProduto`" pela interface **IGerenteLeilao** que é subscrito pelo componente `Produto`. Assim, ocorre a interação Comprador - Produto pela interface **IGerenteLeilao**;
-3. O componente `Produto` publica o tópico pela interface **IProduto** "`/produto/idLeilao/idProduto`" que é subscrito pelo componente `Leilao`, novamente. Logo, um novo leilão poderá ser iniciado ou um em andamento será associado com este novo comprador;
-4. O componente `Leilao` inicia o leilao publicando o tópico "`/leilao/idLeilao/inicio`" pela interface **IGerenteLeilao** que é subscrito pelo componente `Fornecedor`;
-5. O componente `Fornecedor` publica o tópico "`/leilao/idLeilao/idLance`" através da interface **IGerenteLeilao** que é subscrito pelo componente `Leilao`, onde pelo _idLeilao_ aguarda distintos lances;
-6. Por fim, o componente `Leilao` publica o tópico "`/leilao/idLeilao/idLance/menorPreco`" através da interface **IGerenteLeilao** que é subscrito pelo componente `Comprador`, que aguarda e irá receber o resultado do leilão.
+1. O componente `Comprador` publica o tópico "`/leilao/{idUsuario}/produtoDesejado`" pela interface **ILeilao** que é subscrito pelo componente `Leilao`. Desta forma, há demonstração de interesse de um comprador por um produto;
+2. O componente `Leilao` publica o tópico "`/leilao/{idLeilao}/buscaProduto`" pela interface **IProduto** que é subscrito pelo componente `Produto`. Assim, ocorre a interação Leilão - Produto pela interface **IProduto**;
+3. O componente `Produto` publica o tópico pela interface **IProduto** "`/produto/{idLeilao}/{idProduto}`" que é subscrito pelo componente `Leilao`, novamente. Logo, um novo leilão poderá ser iniciado ou um em andamento será associado com este novo comprador;
+4. O componente `Leilao` inicia o leilao publicando o tópico "`/leilao/{idLeilao}/inicio`" pela interface **ILeilao** que é subscrito pelo componente `Fornecedor`;
+5. O componente `Fornecedor` publica o tópico "`/oferta/{idLeilao}/{idOferta}`" através da interface **IOferta** que é subscrito pelo componente `Leilao`, onde pelo _idLeilao_ aguarda distintas ofertas;
+6. Por fim, o componente `Leilao` publica o tópico "`/oferta/{idLeilao}/{idOferta}/menorPreco`" através da interface **IOferta** que é subscrito pelo componente `Comprador`, que aguarda e irá receber o resultado do leilão.
 
 ## A seguir temos a descrição dos componentes:
 
 ### Componente `Comprador`
 
-> <Resumo do papel do componente e serviços que ele oferece.>
+> <Resumo do papel do componente e serviços que ele oferece.> 
 
 ![Componente](diagrama-componente-mensagens.png)
 
