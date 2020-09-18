@@ -1,11 +1,16 @@
-# `Ranqueamento por Avaliação de Fornecedores e Leilão invertido`
+# Ranqueamento por Avaliação de Fornecedores e Leilão invertido
 
 # Equipe
 * eNove
 
-# Nível 1
+### Membros
+* Andrew Siqueira Guedes
+* Fernando de Morais
+* Rafael Mardegan Marquini
+* Rodolfo Dalla Costa
+* Ronaldo de Moraes Galvão
 
-Apresente aqui o detalhamento do Nível 1 conforme detalhado na especificação com, no mínimo, as seguintes subseções:
+# Nível 1
 
 ## Diagrama Geral do Nível 1
 
@@ -15,35 +20,34 @@ Apresente um diagrama conforme o modelo a seguir:
 
 ### Detalhamento da interação de componentes
 
-O detalhamento deve seguir um formato de acordo com o exemplo a seguir:
+1. O componente `Comprador` publica o tópico "`/leilao/idUsuario/produtoDesejado`" pela interface **IGerenteLeilao** que é subscrito pelo componente `Leilao`. Desta forma, há demonstração de interesse de um comprador por um produto;
+2. O componente `Leilao` publica o tópico "`/leilao/idLeilao/buscaProduto`" pela interface **IGerenteLeilao** que é subscrito pelo componente `Produto`. Assim, ocorre a interação Comprador - Produto pela interface **IGerenteLeilao**;
+3. O componente `Produto` publica o tópico pela interface **IProduto** "`/produto/idLeilao/idProduto`" que é subscrito pelo componente `Leilao`, novamente. Logo, um novo leilão poderá ser iniciado ou um em andamento será associado com este novo comprador;
+4. O componente `Leilao` inicia o leilao publicando o tópico "`/leilao/idLeilao/inicio`" pela interface **IGerenteLeilao** que é subscrito pelo componente `Fornecedor`;
+5. O componente `Fornecedor` publica o tópico "`/leilao/idLeilao/idLance`" através da interface **IGerenteLeilao** que é subscrito pelo componente `Leilao`, onde pelo _idLeilao_ aguarda distintos lances;
+6. Por fim, o componente `Leilao` publica o tópico "`/leilao/idLeilao/idLance/menorPreco`" através da interface **IGerenteLeilao** que é subscrito pelo componente `Comprador`, que aguarda e irá receber o resultado do leilão.
 
-1. O Componente `Leilao` lê o tópico "`produtoDesejado/idLeilao`" para verificar se já existe algum leilão para aquele produto. 
-1. O componente `Leilao` inicia o leilão publicando no barramento a mensagem de tópico "`produtoDesejado/idLeilao/idUsuario`" através da interface `IGerenteLeilao`.
-1. Os componentes `Comprador` e `Produto`, também assinam o barramento para "`produtoDesejado/idLeilao/idUsuario`" iniciando assim o monitoramento deste tópico e a Interação entre `Leilao`, `Comprador` e `Produto`.
-1. O compomente `Fornecedor` assina no barramento mensagens de tópico "`leilão/idLeilao/início`" através da interface `IParticipaLeilao`. 
-1. Quando `Fornecedor` recebe uma mensagem no tópico "`leilão/idLeilao/início`" o componente subscreve o outro tópico "`idUsuario/idLeilao/produtoDesejado`" e por sua vez inicia sua participação do leilão publicando ao componente `Comprador`.
+## A seguir temos a descrição dos componentes:
 
-A seguir temos a descrição dos componentes:
-
-## Componente `Comprador`
-
-> <Resumo do papel do componente e serviços que ele oferece.>
-
-![Componente](diagrama-componente-mensagens.png)
-
-## Componente `Produto`
+### Componente `Comprador`
 
 > <Resumo do papel do componente e serviços que ele oferece.>
 
 ![Componente](diagrama-componente-mensagens.png)
 
-## Componente `Fornecedor`
+### Componente `Produto`
 
 > <Resumo do papel do componente e serviços que ele oferece.>
 
 ![Componente](diagrama-componente-mensagens.png)
 
-## Componente `Leilao`
+### Componente `Fornecedor`
+
+> <Resumo do papel do componente e serviços que ele oferece.>
+
+![Componente](diagrama-componente-mensagens.png)
+
+### Componente `Leilao`
 
 > <Resumo do papel do componente e serviços que ele oferece.>
 
