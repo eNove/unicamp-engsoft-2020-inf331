@@ -23,13 +23,32 @@ O detalhamento deve seguir um formato de acordo com o exemplo a seguir:
 1. O compomente `Fornecedor` assina no barramento mensagens de tópico "`leilão/idLeilao/início`" através da interface `IParticipaLeilao`. 
 1. Quando `Fornecedor` recebe uma mensagem no tópico "`leilão/idLeilao/início`" o componente subscreve o outro tópico "`idUsuario/idLeilao/produtoDesejado`" e por sua vez inicia sua participação do leilão publicando ao componente `Comprador`.
 
-Para cada componente será apresentado um documento conforme o modelo a seguir:
+A seguir temos a descrição dos componentes:
 
-## Componente `<Nome do Componente>`
+## Componente `Comprador`
 
 > <Resumo do papel do componente e serviços que ele oferece.>
 
 ![Componente](diagrama-componente-mensagens.png)
+
+## Componente `Produto`
+
+> <Resumo do papel do componente e serviços que ele oferece.>
+
+![Componente](diagrama-componente-mensagens.png)
+
+## Componente `Fornecedor`
+
+> <Resumo do papel do componente e serviços que ele oferece.>
+
+![Componente](diagrama-componente-mensagens.png)
+
+## Componente `Leilao`
+
+> <Resumo do papel do componente e serviços que ele oferece.>
+
+![Componente](diagrama-componente-mensagens.png)
+
 
 **Interfaces**
 > * Listagem das interfaces do componente.
