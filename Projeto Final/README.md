@@ -14,7 +14,7 @@
 
 ## Diagrama Geral do Nível 1
 
-Apresente um diagrama conforme o modelo a seguir:
+É apresentado a seguir o diagrama contendo o modelo do barramento para o tema proposto:
 
 > ![Modelo de diagrama no nível 1](images/barramento_nivel1.png)
 
@@ -245,13 +245,11 @@ nome | nome do fornecedor cadastrado no sistema
 
 # Nível 2
 
-Apresente aqui o detalhamento do Nível 2 conforme detalhado na especificação com, no mínimo, as seguintes subseções:
-
 ## Diagrama do Nível 2
 
-Apresente um diagrama conforme o modelo a seguir:
+É apresentado a seguir o diagrama contendo o modelo das camadas `View` e `Controller` para o tema proposto neste projeto:
 
-> ![Modelo de diagrama no nível 2](images/diagrama-subcomponentes.png)
+> ![Diagrama de subcomponentes](images/diagrama-subcomponentes.png)
 
 ### Detalhamento da interação de componentes
 
@@ -271,9 +269,7 @@ Para cada componente será apresentado um documento conforme o modelo a seguir:
 ![Componente](images/diagrama-componente.png)
 
 **Interfaces**
-> * ILeilao (ja especificada)
-> * ITemplate
-> * ISessao
+> * Listagem das interfaces do componente.
 
 As interfaces listadas são detalhadas a seguir:
 
