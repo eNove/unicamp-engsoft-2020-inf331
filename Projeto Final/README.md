@@ -269,7 +269,9 @@ Para cada componente será apresentado um documento conforme o modelo a seguir:
 ![Componente](images/diagrama-componente.png)
 
 **Interfaces**
-> * Listagem das interfaces do componente.
+> * ILeilao (ja especificada)
+> * ITemplate
+> * ISessao
 
 As interfaces listadas são detalhadas a seguir:
 
