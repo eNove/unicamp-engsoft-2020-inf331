@@ -297,7 +297,8 @@ Detalhamento do json:
   "produto":{
     "idProduto" : "0001",
     "nome": "Geladeira",
-    ...
+    "qtdEstoque": 3,
+    "imgProduto": "example.com/<idLocalizacao>"
   }
 }
 ~~~
