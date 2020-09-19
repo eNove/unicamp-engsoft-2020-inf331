@@ -162,42 +162,68 @@ vlrLance | valor da oferta
 
 ### Interface IProduto
 
-Interface para envio de dados do pedido com itens associados.
+Interface para comunicação entre `Leilao` e `Produto`, utilizada pelo componente `Leilao` para início do processo de validação de disponibilidade de um produto e pelo componente `Produto` para retorno de detalhes e lista de fornecedores.
 
-**Tópico**: `pedido/{id}/dados`
+**Tópico**: `leilao/{idLeilao}/buscaProduto`
 
-Classes que representam objetos JSON associados às mensagens da interface:
-
-![Diagrama Classes REST](images/diagrama-classes-rest.png)
+![Consulta de Produto](images/classe_iproduto_consulta.png)
 
 ~~~json
 {
-  "number": 16,
-  "duoDate": "2009-10-04",
-  "total": 1937.01,
-  "items": {
-    "item": {
-       "itemid": "1245",
-       "quantity": 1
-    },
-    "item": {
-       "itemid": "1321",
-       "quantity": 1
-    }
-  }  
+  "idLeilao": "000001",
+  "produtoDesejado": "Geladeira",
 }
 ~~~
 
 Detalhamento da mensagem JSON:
 
+**Consulta**  
+
+Atributo | Descrição
+-------| --------
+idLeilao | número do leilão que requisitou o produto
+produtoDesejado | palavras chave para localização do produto
+
+**Tópico**: `produto/{idLeilao}/{idProduto}`
+
+![Retorno de Produto](images/classe_iproduto_retorno.png)
+
+~~~json
+{
+  "idLeilao": "000001",
+  "produto": {
+    "idProduto": "0123",
+    "nome": "Geladeira"
+  },
+  "fornecedores": [
+    { "idFornecedore": "001", "nome": "Brastemp" },
+    { "idFornecedore": "002", "nome": "Lojas 100" },
+    { "idFornecedore": "003", "nome": "Eletro Norte" },
+    { "idFornecedore": "004", "nome": "Cibelar" },
+  ]
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+**Retorno**
+Atributo | Descrição
+-------| --------
+idLeilao | número do leilão que requisitou o produto
+produto | detalhes do produto solicitado
+fornecedores | listagem dos fornecedores do produto
+
 **Produto**
 Atributo | Descrição
 -------| --------
-number | número do pedido
-duoDate | data de vencimento
-total | valor total do pedido
-items | itens do pedido
+idProduto | número único do produto
+nome | nome do produto normalizado
 
+**Fornecedor**
+Atributo | Descrição
+-------| --------
+idFornecedor | número único do fornecedor
+nome | nome do fornecedor cadastrado no sistema
 
 # Nível 2
 
