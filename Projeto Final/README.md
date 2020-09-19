@@ -36,7 +36,7 @@ Apresente um diagrama conforme o modelo a seguir:
 ![Componente](diagrama-componente-mensagens.png)
 
 **Interfaces**  
-> * ILeilão
+> * ILeilao
 > * IOferta
 
 ### Componente `Produto`
@@ -46,7 +46,7 @@ Apresente um diagrama conforme o modelo a seguir:
 ![Componente](diagrama-componente-mensagens.png)
 
 **Interfaces**  
-> * Iproduto
+> * IProduto
 
 ### Componente `Fornecedor`
 
@@ -71,7 +71,7 @@ Apresente um diagrama conforme o modelo a seguir:
 
 ## A seguir temos as interfaces uitlizadas:
 
-### Interface IGerenteLeilao
+### Interface ILeilao
 
 Interface para envio de dados do pedido com itens associados.
 
