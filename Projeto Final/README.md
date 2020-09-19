@@ -14,7 +14,7 @@
 
 ## Diagrama Geral do Nível 1
 
-Apresente um diagrama conforme o modelo a seguir:
+É apresentado a seguir o diagrama contendo o modelo do barramento para o tema proposto:
 
 > ![Modelo de diagrama no nível 1](images/barramento_nivel1.png)
 
@@ -73,71 +73,88 @@ Apresente um diagrama conforme o modelo a seguir:
 
 ### Interface ILeilao
 
-Interface para envio de dados do pedido com itens associados.
+Interface realiza o envio de dados do produto desejado pelo cliente ao componente Leilão. 
+Comunica os fornecedores que comercialização o produto desejado.
 
 **Tópico**: `leilao/{id}/produtoDesejado`
 
-Classes que representam objetos JSON associados às mensagens da interface:
-
-![Diagrama Classes REST](images/diagrama-classes-rest.png)
+![Diagrama Classes REST](images/diagrama-classes-rest-topico1.jpg)
 
 ~~~json
 {
-  "number": 16,
-  "duoDate": "2009-10-04",
-  "total": 1937.01,
-  "items": {
-    "item": {
-       "itemid": "1245",
-       "quantity": 1
-    },
-    "item": {
-       "itemid": "1321",
-       "quantity": 1
-    }
-  }  
+    "idUsuario": "098234",
+    "produtoDesejado":"Geladeira",
 }
 ~~~
 
 Detalhamento da mensagem JSON:
 
-**Leilao**
+**ILeilao**
 Atributo | Descrição
--------| --------
-number | número do pedido
-duoDate | data de vencimento
-total | valor total do pedido
-items | itens do pedido
+-------- | --------
+idUsuario | Identificação do usuário
+produtoDesejado | Identificador do produto desejado pelo comprador
 
-**Item**
-Atributo | Descrição
--------| --------
-itemid | identificador do item
-quantity | quantidade do item
 
-### Interface IOferta
+**Tópico**: `leilao/{idLeilao}/inicio`
 
-Interface que faz o envio de dados do "lance" ofertado pelo orquestrador ILeilao recebido pelo Fornecedor.
-
-**Tópico**: `oferta/{idLeilao}/{idOferta}/menorPreco` 
-
-**Tópico**: `oferta/{idLeilao}/{idOferta}`
-
-![Diagrama Classes REST](images/diagrama-classes-rest.png)
+![Diagrama Classes REST](images/diagrama-classes-rest-topico2.jpg)
 
 ~~~json
 {
-  "idOferta": 000001,
+    "idLeilao": "000001",
+    "fornecedores": [
+      { "idFornecedore": "001", "nome": "Brastemp" },
+      { "idFornecedore": "002", "nome": "Lojas 100" },
+      { "idFornecedore": "003", "nome": "Eletro Norte" },
+      { "idFornecedore": "004", "nome": "Cibelar" },
+    ],
+    "produto": {
+        "idProduto": "0123",
+        "nome": "Geladeira"
+    },
+    "oferta_menor_preco":{
+      "valor": 00.00
+    }
+}
+~~~
+
+**ILeilao**
+Atributo | Descrição
+------- | --------
+idLeilao | Identificação do leilão
+fornecedores | Array com lista de fornecedores
+idFornecedore | Identificação do fornecedor
+nome | Nome do fornecedor
+produto | Objeto de produto
+idProduto  | Identificação do Produto
+nome | Nome do Produto
+
+
+### Interface IOferta
+
+Interface que faz o envio de dados do "lance" ofertado pelo `Fornecedor` que é recebido e orquestrado pelo componente `Leilao`, que por sua vez disponibiliza a mensagem para o componente `Comprador`priorizando os menores valores "lance" ofertados.
+
+**Tópicos**:
+> * `oferta/{idLeilao}/{idOferta}/menorPreco` 
+> * `oferta/{idLeilao}/{idOferta}`
+
+![Diagrama Classes REST](images/classe_ioferta.png)
+
+~~~json
+{
+  "idLeilao": "000001",
+  "idOferta": "000001",
   "dtIniOferta": "2020-09-18T21:20:00Z",
   "dtFimOferta": "2020-09-20T21:20:00Z",
-  "items": {
-    "item": {
-       "itemid": "0123",
-       "nome": "Geladeira",
-       "quantidade": 1,
-       "vlrLance": 3999.99
+  "produtos": [
+    {
+      "idProduto": "0123",
+      "nome": "Geladeira",
+      "quantidade": 1,
+      "vlrLance": 3999.99
     }
-  }     
+  ]     
 }
 ~~~
 
@@ -146,15 +163,16 @@ Detalhamento da mensagem JSON:
 **Oferta**
 Atributo | Descrição
 -------| --------
+idLeilao | número do leilão que requisitou o produto
 idOferta | número da oferta
 dtIniOferta | data de requisicao
 dtFimOferta | itens do pedido
-items | itens ofertados
+produtos | itens ofertados
 
 **Item**
 Atributo | Descrição
 -------| --------
-itemid | identificador do item
+idProduto | identificador do item
 nome | nome do item
 quantidade | quantidade do item
 vlrLance | valor da oferta
@@ -162,50 +180,74 @@ vlrLance | valor da oferta
 
 ### Interface IProduto
 
-Interface para envio de dados do pedido com itens associados.
+Interface para comunicação entre `Leilao` e `Produto`, utilizada pelo componente `Leilao` para início do processo de validação de disponibilidade de um produto e pelo componente `Produto` para retorno de detalhes e lista de fornecedores.
 
-**Tópico**: `pedido/{id}/dados`
+**Tópico**: `leilao/{idLeilao}/buscaProduto`
 
-Classes que representam objetos JSON associados às mensagens da interface:
-
-![Diagrama Classes REST](images/diagrama-classes-rest.png)
+![Consulta de Produto](images/classe_iproduto_consulta.png)
 
 ~~~json
 {
-  "number": 16,
-  "duoDate": "2009-10-04",
-  "total": 1937.01,
-  "items": {
-    "item": {
-       "itemid": "1245",
-       "quantity": 1
-    },
-    "item": {
-       "itemid": "1321",
-       "quantity": 1
-    }
-  }  
+  "idLeilao": "000001",
+  "produtoDesejado": "Geladeira",
 }
 ~~~
 
 Detalhamento da mensagem JSON:
 
+**Consulta**  
+
+Atributo | Descrição
+-------| --------
+idLeilao | número do leilão que requisitou o produto
+produtoDesejado | palavras chave para localização do produto
+
+**Tópico**: `produto/{idLeilao}/{idProduto}`
+
+![Retorno de Produto](images/classe_iproduto_retorno.png)
+
+~~~json
+{
+  "idLeilao": "000001",
+  "produto": {
+    "idProduto": "0123",
+    "nome": "Geladeira"
+  },
+  "fornecedores": [
+    { "idFornecedore": "001", "nome": "Brastemp" },
+    { "idFornecedore": "002", "nome": "Lojas 100" },
+    { "idFornecedore": "003", "nome": "Eletro Norte" },
+    { "idFornecedore": "004", "nome": "Cibelar" },
+  ]
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+**Retorno**
+Atributo | Descrição
+-------| --------
+idLeilao | número do leilão que requisitou o produto
+produto | detalhes do produto solicitado
+fornecedores | listagem dos fornecedores do produto
+
 **Produto**
 Atributo | Descrição
 -------| --------
-number | número do pedido
-duoDate | data de vencimento
-total | valor total do pedido
-items | itens do pedido
+idProduto | número único do produto
+nome | nome do produto normalizado
 
+**Fornecedor**
+Atributo | Descrição
+-------| --------
+idFornecedor | número único do fornecedor
+nome | nome do fornecedor cadastrado no sistema
 
 # Nível 2
 
-Apresente aqui o detalhamento do Nível 2 conforme detalhado na especificação com, no mínimo, as seguintes subseções:
-
 ## Diagrama do Nível 2
 
-Apresente um diagrama conforme o modelo a seguir:
+É apresentado a seguir o diagrama contendo o modelo das camadas `View` e `Controller` para o tema proposto neste projeto:
 
 > ![Diagrama de subcomponentes](images/diagrama-subcomponentes.png)
 
