@@ -14,7 +14,7 @@
 
 ## Diagrama Geral do Nível 1
 
-É apresentado a seguir o diagrama contendo o modelo do barramento para o tema proposto:
+Apresente um diagrama conforme o modelo a seguir:
 
 > ![Modelo de diagrama no nível 1](images/barramento_nivel1.png)
 
@@ -245,11 +245,13 @@ nome | nome do fornecedor cadastrado no sistema
 
 # Nível 2
 
+Apresente aqui o detalhamento do Nível 2 conforme detalhado na especificação com, no mínimo, as seguintes subseções:
+
 ## Diagrama do Nível 2
 
-É apresentado a seguir o diagrama contendo o modelo das camadas `View` e `Controller` para o tema proposto neste projeto:
+Apresente um diagrama conforme o modelo a seguir:
 
-> ![Diagrama de subcomponentes](images/diagrama-subcomponentes.png)
+> ![Modelo de diagrama no nível 2](images/diagrama-subcomponentes.png)
 
 ### Detalhamento da interação de componentes
 
@@ -269,21 +271,42 @@ Para cada componente será apresentado um documento conforme o modelo a seguir:
 ![Componente](images/diagrama-componente.png)
 
 **Interfaces**
-> * Listagem das interfaces do componente.
+> * ILeilao (ja especificada)
+> * ITemplate
+> * ISessao
 
 As interfaces listadas são detalhadas a seguir:
 
 ## Detalhamento das Interfaces
 
 ### Interface `ITemplate`
+![Diagrama da Interface](images/diagrama-Itemplate.jpg)
 
-> ![Diagrama da Interface](images/diagrama-Itemplate.jpg)
+> A Interface Itemplate reune um montante de informacoes que sao importantes para o fornecedor e que podem ser gerenciadas em sua maioria pelo proprio model do fornecedor. Utilizada para se comunicar para com a view.
 
-> <Resumo do papel da interface.>
+Detalhamento do json:
+~~~json
+{
+  "MenorOferta": 10.10,
+  "SuaUltimaOferta": 09.09,
+  "MelhorOfertaEhSua": false,
+  "TempoDesdeUltimaOferta": "00:05:13",
+  "produto":{
+    "idProduto" : "0001",
+    "nome": "Geladeira",
+    ...
+  }
+}
+~~~
 
 Método | Objetivo
 -------| --------
-`<id do método>` | `<objetivo do método e descrição dos parâmetros>`
+`MenorOferta` | `Valor da menor oferta em leilao`
+`SuaUltimaOferta` | `Valor da ultima oferta feita pelo fornecedor em leilao (caso nao tenha feito nenhuma o valor eh negativo`
+`MelhorOfertaEhSua` | `Indicador que determina se a melhor oferta do leilao pertence ao fornecedor`
+`TempoDesdeUltimaOferta` | `Tempo decorrido desde seu ultimo lance`
+`produto` | `Informacoes sobre o Produto como Id, nome entre outras.`
+
 
 ## Exemplos:
 
