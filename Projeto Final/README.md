@@ -143,6 +143,7 @@ Interface que faz o envio de dados do "lance" ofertado pelo `Fornecedor` que é 
 
 ~~~json
 {
+  "idLeilao": "000001",
   "idOferta": "000001",
   "dtIniOferta": "2020-09-18T21:20:00Z",
   "dtFimOferta": "2020-09-20T21:20:00Z",
@@ -162,6 +163,7 @@ Detalhamento da mensagem JSON:
 **Oferta**
 Atributo | Descrição
 -------| --------
+idLeilao | número do leilão que requisitou o produto
 idOferta | número da oferta
 dtIniOferta | data de requisicao
 dtFimOferta | itens do pedido
