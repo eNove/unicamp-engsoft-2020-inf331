@@ -78,7 +78,7 @@ Comunica os fornecedores que comercialização o produto desejado.
 
 **Tópico**: `leilao/{id}/produtoDesejado`
 
-![Diagrama Classes REST](images/diagrama-classes-rest-topico1.png)
+![Diagrama Classes REST](images/diagrama-classes-rest-topico1.jpg)
 
 ~~~json
 {
@@ -98,7 +98,7 @@ produtoDesejado | Identificador do produto desejado pelo comprador
 
 **Tópico**: `leilao/{idLeilao}/inicio`
 
-![Diagrama Classes REST](images/diagrama-classes-rest-topico2.png)
+![Diagrama Classes REST](images/diagrama-classes-rest-topico2.jpg)
 
 ~~~json
 {
