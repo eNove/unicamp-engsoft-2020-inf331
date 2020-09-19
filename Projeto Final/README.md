@@ -78,7 +78,7 @@ Comunica os fornecedores que comercialização o produto desejado.
 
 **Tópico**: `leilao/{id}/produtoDesejado`
 
-![Diagrama Classes REST](images/diagrama-classes-rest-topico1.png)
+![Diagrama Classes REST](images/diagrama-classes-rest-topico1.jpg)
 
 ~~~json
 {
@@ -98,7 +98,7 @@ produtoDesejado | Identificador do produto desejado pelo comprador
 
 **Tópico**: `leilao/{idLeilao}/inicio`
 
-![Diagrama Classes REST](images/diagrama-classes-rest-topico2.png)
+![Diagrama Classes REST](images/diagrama-classes-rest-topico2.jpg)
 
 ~~~json
 {
@@ -124,31 +124,31 @@ Atributo | Descrição
 ------- | --------
 idLeilao | Identificação do leilão
 fornecedores | Array com lista de fornecedores
-	idFornecedore | Identificação do fornecedor
-	nome | Nome do fornecedor
+idFornecedore | Identificação do fornecedor
+nome | Nome do fornecedor
 produto | Objeto de produto
-	idProduto | Identificação do Produto
-	nome | Nome do Produto
+idProduto  | Identificação do Produto
+nome | Nome do Produto
 
 
 ### Interface IOferta
 
-Interface que faz o envio de dados do "lance" ofertado pelo orquestrador ILeilao recebido pelo Fornecedor.
+Interface que faz o envio de dados do "lance" ofertado pelo `Fornecedor` que é recebido e orquestrado pelo componente `Leilao`, que por sua vez disponibiliza a mensagem para o componente `Comprador`priorizando os menores valores "lance" ofertados.
 
-**Tópico**: `oferta/{idLeilao}/{idOferta}/menorPreco` 
+**Tópicos**:
+> * `oferta/{idLeilao}/{idOferta}/menorPreco` 
+> * `oferta/{idLeilao}/{idOferta}`
 
-**Tópico**: `oferta/{idLeilao}/{idOferta}`
-
-![Diagrama Classes REST](images/diagrama-classes-rest.png)
+![Diagrama Classes REST](images/classe_ioferta.png)
 
 ~~~json
 {
-  "idOferta": 000001,
+  "idOferta": "000001",
   "dtIniOferta": "2020-09-18T21:20:00Z",
   "dtFimOferta": "2020-09-20T21:20:00Z",
-  "items": [
+  "produtos": [
     {
-      "itemid": "0123",
+      "idProduto": "0123",
       "nome": "Geladeira",
       "quantidade": 1,
       "vlrLance": 3999.99
@@ -165,12 +165,12 @@ Atributo | Descrição
 idOferta | número da oferta
 dtIniOferta | data de requisicao
 dtFimOferta | itens do pedido
-items | itens ofertados
+produtos | itens ofertados
 
 **Item**
 Atributo | Descrição
 -------| --------
-itemid | identificador do item
+idProduto | identificador do item
 nome | nome do item
 quantidade | quantidade do item
 vlrLance | valor da oferta
