@@ -130,11 +130,11 @@ nome | Nome do Produto
 
 ### Interface IOferta
 
-Interface que faz o envio de dados do "lance" ofertado pelo `Fornecedor` recebido e orquestrador componente `Leilao`, que por sua vez disponibiliza para o componente `Comprador`.
+Interface que faz o envio de dados do "lance" ofertado pelo `Fornecedor` que é recebido e orquestrado pelo componente `Leilao`, que por sua vez disponibiliza a mensagem para o componente `Comprador`.
 
-**Tópico**: `oferta/{idLeilao}/{idOferta}/menorPreco` 
-
-**Tópico**: `oferta/{idLeilao}/{idOferta}`
+**Tópicos**:
+> * `oferta/{idLeilao}/{idOferta}/menorPreco` 
+> * `oferta/{idLeilao}/{idOferta}`
 
 ![Diagrama Classes REST](images/classe_ioferta.png)
 
