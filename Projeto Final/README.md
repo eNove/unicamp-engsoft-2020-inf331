@@ -14,7 +14,7 @@
 
 ## Diagrama Geral do Nível 1
 
-Apresente um diagrama conforme o modelo a seguir:
+É apresentado a seguir o diagrama contendo o modelo do barramento para o tema proposto:
 
 > ![Modelo de diagrama no nível 1](images/barramento_nivel1.png)
 
@@ -245,26 +245,20 @@ nome | nome do fornecedor cadastrado no sistema
 
 # Nível 2
 
-Apresente aqui o detalhamento do Nível 2 conforme detalhado na especificação com, no mínimo, as seguintes subseções:
-
 ## Diagrama do Nível 2
 
-Apresente um diagrama conforme o modelo a seguir:
+É apresentado a seguir o diagrama contendo o modelo das camadas `Model`, `View` e `Controller` para o tema proposto neste projeto:
 
-> ![Modelo de diagrama no nível 2](images/diagrama-subcomponentes.png)
+> ![Diagrama de subcomponentes](images/diagrama-subcomponentes.png)
 
 ### Detalhamento da interação de componentes
 
 O detalhamento deve seguir um formato de acordo com o exemplo a seguir:
 
-* O componente `Entrega Pedido Compra` assina no barramento mensagens de tópico "`pedido/+/entrega`" através da interface `Solicita Entrega`.
-  * Ao receber uma mensagem de tópico "`pedido/+/entrega`", dispara o início da entrega de um conjunto de produtos.
-* Os componentes `Solicita Estoque` e `Solicita Compra` se comunicam com componentes externos pelo barramento:
-  * Para consultar o estoque, o componente `Solicita Estoque` publica no barramento uma mensagem de tópico "`produto/<id>/estoque/consulta`" através da interface `Consulta Estoque` e assina mensagens de tópico "`produto/<id>/estoque/status`" através da interface `Posição Estoque` que retorna a disponibilidade do produto.
-
-## Diagrama UML 
-
-> ![Diagrama de UML](images/diagrama_classes_nivel_2.jpg)
+* O componente `Leilao` assina no barramento mensagens de tópico "`leilao/{idUsuario}/produtoDesejado`" através da interface **ILeilao**.
+  * Ao receber uma mensagem de tópico "`leilao/{idUsuario}/produtoDesejado`", dispara o início da validação de disponibilidade de um produto puclicado pelo componente `Comprador`.
+* O componente `Leilao` publica a mensagem `/leilao/{idLeilao}/buscaProduto` que assinada pelo comonente `Produto` e devolvidade para o componente `Leilao` que assina `produto/{idLeilao}/buscaProduto}` 
+* O componente `Fornecedor` assina no barramento a mensagem de tópico `leilao/{idLeilao}/inicio` através da interface **IOferta** com componente `Leilao`, que  publica o topico `oferta/{idLeilao}/{idOferta}/menorPreco`  no barramento, finalizando assim o percurso iniciado pelo comprador.
 
 Para cada componente será apresentado um documento conforme o modelo a seguir:
 
@@ -275,51 +269,48 @@ Para cada componente será apresentado um documento conforme o modelo a seguir:
 ![Componente](images/diagrama-componente.png)
 
 **Interfaces**
-> * ILeilao (ja especificada)
-> * ITemplate
+> * Listagem das interfaces do componente.
 
 As interfaces listadas são detalhadas a seguir:
 
 ## Detalhamento das Interfaces
 
 ### Interface `ITemplate`
-![Diagrama da Interface](images/diagrama-Itemplate.jpg)
 
-> A Interface Itemplate reune um montante de informacoes que sao importantes para o fornecedor e que podem ser gerenciadas em sua maioria pelo proprio model do fornecedor. Utilizada para se comunicar para com a view.
+> ![Diagrama da Interface](images/diagrama-Itemplate.jpg)
 
-Detalhamento do json:
-~~~json
-{
-  "MenorOferta": 10.10,
-  "SuaUltimaOferta": 09.09,
-  "MelhorOfertaEhSua": false,
-  "TempoDesdeUltimaOferta": "00:05:13",
-  "produto":{
-    "idProduto" : "0001",
-    "nome": "Geladeira",
-    "qtdEstoque": 3,
-    "imgProduto": "example.com/<idLocalizacao>"
-  }
-}
-~~~
+> <Resumo do papel da interface.>
 
 Método | Objetivo
 -------| --------
-`MenorOferta` | `Valor da menor oferta em leilao`
-`SuaUltimaOferta` | `Valor da ultima oferta feita pelo fornecedor em leilao (caso nao tenha feito nenhuma o valor eh negativo`
-`MelhorOfertaEhSua` | `Indicador que determina se a melhor oferta do leilao pertence ao fornecedor`
-`TempoDesdeUltimaOferta` | `Tempo decorrido desde seu ultimo lance`
-`produto` | `Informacoes sobre o Produto como Id, nome entre outras.`
+`<id do método>` | `<objetivo do método e descrição dos parâmetros>`
 
+## Exemplos:
+
+### Interface `ITableProducer`
+
+![Diagrama da Interface](images/diagrama-interface-itableproducer.png)
+
+Interface provida por qualquer fonte de dados que os forneça na forma de uma tabela.
+
+Método | Objetivo
+-------| --------
+`requestAttributes` | Retorna um vetor com o nome de todos os atributos (colunas) da tabela.
+`requestInstances` | Retorna uma matriz em que cada linha representa uma instância e cada coluna o valor do respectivo atributo (a ordem dos atributos é a mesma daquela fornecida por `requestAttributes`.
+
+### Interface `IDataSetProperties`
+
+![Diagrama da Interface](images/diagrama-interface-idatasetproperties.png)
+
+Define o recurso (usualmente o caminho para um arquivo em disco) que é a fonte de dados.
+
+Método | Objetivo
+-------| --------
+`getDataSource` | Retorna o caminho da fonte de dados.
+`setDataSource` | Define o caminho da fonte de dados, informado através do parâmetro `dataSource`.
 
 # Multiplas Interfaces
 
-No desenho da arquitetura foi utilizado MVC e a interface ITemplate que será utilizada para definição dos objetos de comunicação entre os controllers e as diversas implementações de interface.
-
-Para possibilitar o chaveamento das Views para as plataformas Web e Mobile será utilizado o design pattern abstract factory.
-
-A seguir segue o diagrama do componente `ListaOfertaFornecedores` que exemplifica essa implementação.
-
-Neste diagrama temos a interface `IInterfaceComponentFactory` que define os métodos de factory de componentes para utilização nas diversas implementações concretas, exemplificadas no diagrama para web e mobile pelas classes concretas `WebComponentFactory` e `MobileComponentFactory`. As classes concretas são responsáveis, através da implementação de `IInterfaceComponentFactory`, por definir os métodos necessários para criar os componentes em suas plataformas específicas.
-
-![Multiplas Interfaces](images/multilplas_interfaces.png)
+> Escreva um texto detalhando como seus componentes  podem ser preparados para que seja possível trocar de interface apenas trocando o componente View e mantendo o Model e Controller.
+>
+> É recomendado a inserção de, pelo menos, um diagrama que deve ser descrito no texto. O formato do diagrama é livre e deve ilustrar a arquitetura proposta.
