@@ -133,8 +133,8 @@ Interface que faz o envio de dados do "lance" ofertado pelo orquestrador ILeilao
   "items": {
     "item": {
        "itemid": "0123",
-       "nome": "Geladeira"
-       "quantidade": 1
+       "nome": "Geladeira",
+       "quantidade": 1,
        "vlrLance": 3999.99
     }
   }     
