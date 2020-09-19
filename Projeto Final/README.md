@@ -130,7 +130,7 @@ nome | Nome do Produto
 
 ### Interface IOferta
 
-Interface que faz o envio de dados do "lance" ofertado pelo `Fornecedor` que é recebido e orquestrado pelo componente `Leilao`, que por sua vez disponibiliza a mensagem para o componente `Comprador`.
+Interface que faz o envio de dados do "lance" ofertado pelo `Fornecedor` que é recebido e orquestrado pelo componente `Leilao`, que por sua vez disponibiliza a mensagem para o componente `Comprador`priorizando os menores valores "lance" ofertados.
 
 **Tópicos**:
 > * `oferta/{idLeilao}/{idOferta}/menorPreco` 
