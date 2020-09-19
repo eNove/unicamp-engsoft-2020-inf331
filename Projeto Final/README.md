@@ -247,7 +247,7 @@ nome | nome do fornecedor cadastrado no sistema
 
 ## Diagrama do Nível 2
 
-É apresentado a seguir o diagrama contendo o modelo das camadas `View` e `Controller` para o tema proposto neste projeto:
+É apresentado a seguir o diagrama contendo o modelo das camadas `Model`, `View` e `Controller` para o tema proposto neste projeto:
 
 > ![Diagrama de subcomponentes](images/diagrama-subcomponentes.png)
 
@@ -255,18 +255,18 @@ nome | nome do fornecedor cadastrado no sistema
 
 O detalhamento deve seguir um formato de acordo com o exemplo a seguir:
 
-* O componente `Entrega Pedido Compra` assina no barramento mensagens de tópico "`pedido/+/entrega`" através da interface `Solicita Entrega`.
-  * Ao receber uma mensagem de tópico "`pedido/+/entrega`", dispara o início da entrega de um conjunto de produtos.
-* Os componentes `Solicita Estoque` e `Solicita Compra` se comunicam com componentes externos pelo barramento:
-  * Para consultar o estoque, o componente `Solicita Estoque` publica no barramento uma mensagem de tópico "`produto/<id>/estoque/consulta`" através da interface `Consulta Estoque` e assina mensagens de tópico "`produto/<id>/estoque/status`" através da interface `Posição Estoque` que retorna a disponibilidade do produto.
+* O componente `Leilao` assina no barramento mensagens de tópico "`leilao/{idUsuario}/produtoDesejado`" através da interface **ILeilao**.
+  * Ao receber uma mensagem de tópico "`leilao/{idUsuario}/produtoDesejado`", dispara o início da validação de disponibilidade de um produto puclicado pelo componente `Comprador`.
+* O componente `Leilao` publica a mensagem `/leilao/{idLeilao}/buscaProduto` que assinada pelo comonente `Produto` e devolvidade para o componente `Leilao` que assina `produto/{idLeilao}/buscaProduto}` 
+* O componente `Fornecedor` assina no barramento a mensagem de tópico `leilao/{idLeilao}/inicio` através da interface **IOferta** com componente `Leilao`, que  publica o topico `oferta/{idLeilao}/{idOferta}/menorPreco`  no barramento, finalizando assim o percurso iniciado pelo comprador.
 
 Para cada componente será apresentado um documento conforme o modelo a seguir:
 
-## Componente `<Nome do Componente>`
+## Componente `LeilaoEmAndamentoController`
 
-> <Resumo do papel do componente e serviços que ele oferece.>
+Componente responsavel por filtrar os dados recebidos da interface ILeilao, recuperar as informacoes em cache ou no banco referente aos dados recebidos e transformar no `ITemplate` para o view.
 
-![Componente](images/diagrama-componente.png)
+![Componente](images/LeilaoAndamentoController.jpg)
 
 **Interfaces**
 > * Listagem das interfaces do componente.
@@ -275,9 +275,9 @@ As interfaces listadas são detalhadas a seguir:
 
 ## Detalhamento das Interfaces
 
-### Interface `<nome da interface>`
+### Interface `ITemplate`
 
-> ![Diagrama da Interface](images/diagrama-interface-itableproducer.png)
+> ![Diagrama da Interface](images/diagrama-Itemplate.jpg)
 
 > <Resumo do papel da interface.>
 
@@ -311,6 +311,12 @@ Método | Objetivo
 
 # Multiplas Interfaces
 
-> Escreva um texto detalhando como seus componentes  podem ser preparados para que seja possível trocar de interface apenas trocando o componente View e mantendo o Model e Controller.
->
-> É recomendado a inserção de, pelo menos, um diagrama que deve ser descrito no texto. O formato do diagrama é livre e deve ilustrar a arquitetura proposta.
+No desenho da arquitetura foi utilizado MVC e a interface ITemplate que será utilizada para definição dos objetos de comunicação entre os controllers e as diversas implementações de interface.
+
+Para possibilitar o chaveamento das Views para as plataformas Web e Mobile será utilizado o design pattern abstract factory.
+
+A seguir segue o diagrama do componente `ListaOfertaFornecedores` que exemplifica essa implementação.
+
+Neste diagrama temos a interface `IInterfaceComponentFactory` que define os métodos de factory de componentes para utilização nas diversas implementações concretas, exemplificadas no diagrama para web e mobile pelas classes concretas `WebComponentFactory` e `MobileComponentFactory`. As classes concretas são responsáveis, através da implementação de `IInterfaceComponentFactory`, por definir os métodos necessários para criar os componentes em suas plataformas específicas.
+
+![Multiplas Interfaces](images/multilplas_interfaces.png)
