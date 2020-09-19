@@ -251,16 +251,12 @@ nome | nome do fornecedor cadastrado no sistema
 
 > ![Diagrama de subcomponentes](images/diagrama-subcomponentes.png)
 
-### Detalhamento da interação de componentes
-
-O detalhamento deve seguir um formato de acordo com o exemplo a seguir:
+### Detalhamento das interação que envolvem o LeilaoEmAndamentoController
 
 * O componente `Leilao` assina no barramento mensagens de tópico "`leilao/{idUsuario}/produtoDesejado`" através da interface **ILeilao**.
   * Ao receber uma mensagem de tópico "`leilao/{idUsuario}/produtoDesejado`", dispara o início da validação de disponibilidade de um produto puclicado pelo componente `Comprador`.
 * O componente `Leilao` publica a mensagem `/leilao/{idLeilao}/buscaProduto` que assinada pelo comonente `Produto` e devolvidade para o componente `Leilao` que assina `produto/{idLeilao}/buscaProduto}` 
 * O componente `Fornecedor` assina no barramento a mensagem de tópico `leilao/{idLeilao}/inicio` através da interface **IOferta** com componente `Leilao`, que  publica o topico `oferta/{idLeilao}/{idOferta}/menorPreco`  no barramento, finalizando assim o percurso iniciado pelo comprador.
-
-Para cada componente será apresentado um documento conforme o modelo a seguir:
 
 ## Componente `LeilaoEmAndamentoController`
 
