@@ -73,47 +73,60 @@ Apresente um diagrama conforme o modelo a seguir:
 
 ### Interface ILeilao
 
-Interface para envio de dados do pedido com itens associados.
+Interface realiza o envio de dados do produto desejado pelo cliente ao componente Leilão. 
+Comunica os fornecedores que comercialização o produto desejado.
 
 **Tópico**: `leilao/{id}/produtoDesejado`
 
-Classes que representam objetos JSON associados às mensagens da interface:
-
-![Diagrama Classes REST](images/diagrama-classes-rest.png)
+![Diagrama Classes REST](images/diagrama-classes-rest-topico1.png)
 
 ~~~json
 {
-  "number": 16,
-  "duoDate": "2009-10-04",
-  "total": 1937.01,
-  "items": {
-    "item": {
-       "itemid": "1245",
-       "quantity": 1
-    },
-    "item": {
-       "itemid": "1321",
-       "quantity": 1
-    }
-  }  
+    "idUsuario": "098234",
+    "produtoDesejado":"Geladeira",
 }
 ~~~
 
 Detalhamento da mensagem JSON:
 
-**Leilao**
+**ILeilao**
 Atributo | Descrição
--------| --------
-number | número do pedido
-duoDate | data de vencimento
-total | valor total do pedido
-items | itens do pedido
+-------- | --------
+idUsuario | Identificação do usuário
+produtoDesejado | Identificador do produto desejado pelo comprador
 
-**Item**
+
+**Tópico**: `leilao/{idLeilao}/inicio`
+
+![Diagrama Classes REST](images/diagrama-classes-rest-topico2.png)
+
+~~~json
+{
+    "idLeilao": "000001",
+    "fornecedores": [
+      { "idFornecedore": "001", "nome": "Brastemp" },
+      { "idFornecedore": "002", "nome": "Lojas 100" },
+      { "idFornecedore": "003", "nome": "Eletro Norte" },
+      { "idFornecedore": "004", "nome": "Cibelar" },
+    ],
+    "produto": {
+        "idProduto": "0123",
+        "nome": "Geladeira"
+    }
+}
+~~~
+
+**ILeilao**
 Atributo | Descrição
--------| --------
-itemid | identificador do item
-quantity | quantidade do item
+------- | --------
+idLeilao | Identificação do leilão
+fornecedores | Array com lista de fornecedores
+	idFornecedore | Identificação do fornecedor
+	nome | Nome do fornecedor
+produto | Objeto de produto
+	idProduto | Identificação do Produto
+	nome | Nome do Produto
+
 
 ### Interface IOferta
 
