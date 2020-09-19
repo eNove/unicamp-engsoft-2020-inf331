@@ -262,11 +262,11 @@ O detalhamento deve seguir um formato de acordo com o exemplo a seguir:
 
 Para cada componente será apresentado um documento conforme o modelo a seguir:
 
-## Componente `<Nome do Componente>`
+## Componente `LeilaoEmAndamentoController`
 
-> <Resumo do papel do componente e serviços que ele oferece.>
+Componente responsavel por filtrar os dados recebidos da interface ILeilao, recuperar as informacoes em cache ou no banco referente aos dados recebidos e transformar no `ITemplate` para o view.
 
-![Componente](images/diagrama-componente.png)
+![Componente](images/LeilaoAndamentoController.jpg)
 
 **Interfaces**
 > * Listagem das interfaces do componente.
