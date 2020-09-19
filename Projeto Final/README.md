@@ -33,7 +33,7 @@ Apresente um diagrama conforme o modelo a seguir:
 
 > Componente responsável pela iteração entre cliente e os leilões que ocorrem sobre o produto em que o cliente demonstra interesse. Recebe as atualizações dos lances realizados e comunica o cliente sobre os lances e os produtos disponíveis.
 
-![Componente](diagrama-componente-mensagens.png)
+![Componente](images/barramento-c_Comprador.png)
 
 **Interfaces**  
 > * ILeilao
@@ -43,7 +43,7 @@ Apresente um diagrama conforme o modelo a seguir:
 
 > Componente responsável por avaliar a disponibilidade dos produtos que irão entrar em leilão. Devolve lista de fornecedores que comercializam o produto e código do produto requisitado para leilão.
 
-![Componente](diagrama-componente-mensagens.png)
+![Componente](images/barramento-c_Produto.png)
 
 **Interfaces**  
 > * IProduto
@@ -52,7 +52,7 @@ Apresente um diagrama conforme o modelo a seguir:
 
 > Fornecedor é acionado pelo Componente leilão, que informa o código do produto que irá entrar em leilão, avalia a quantidade de produtos disponíveis para leilão e realiza o lance do produto desejado pelo comprador.
 
-![Componente](diagrama-componente-mensagens.png)
+![Componente](images/barramento-c_Fornecedor.png)
 
 **Interfaces**  
 > * IOferta
@@ -62,7 +62,7 @@ Apresente um diagrama conforme o modelo a seguir:
 
 > O Componente Leilão é o orquestrador de todo o leilão que é relaizado. É o componente responsável por receber os interesses do componente Comprador, verifica a disponibilidade dos produtos, aciona a lista de fornecedores que comercializão o produto que irá para leilão. Recebe todos os lances realizados pelos fornecedores e encaminha para o comprador.
 
-![Componente](diagrama-componente-mensagens.png)
+![Componente](images/barramento-c_Leilao.png)
 
 **Interfaces**  
 > * IProduto
@@ -130,29 +130,27 @@ produto | Objeto de produto
 
 ### Interface IOferta
 
-Interface para envio de dados do pedido com itens associados.
+Interface que faz o envio de dados do "lance" ofertado pelo orquestrador ILeilao recebido pelo Fornecedor.
 
-**Tópico**: `pedido/{id}/dados`
+**Tópico**: `oferta/{idLeilao}/{idOferta}/menorPreco` 
 
-Classes que representam objetos JSON associados às mensagens da interface:
+**Tópico**: `oferta/{idLeilao}/{idOferta}`
 
 ![Diagrama Classes REST](images/diagrama-classes-rest.png)
 
 ~~~json
 {
-  "number": 16,
-  "duoDate": "2009-10-04",
-  "total": 1937.01,
-  "items": {
-    "item": {
-       "itemid": "1245",
-       "quantity": 1
-    },
-    "item": {
-       "itemid": "1321",
-       "quantity": 1
+  "idOferta": 000001,
+  "dtIniOferta": "2020-09-18T21:20:00Z",
+  "dtFimOferta": "2020-09-20T21:20:00Z",
+  "items": [
+    {
+      "itemid": "0123",
+      "nome": "Geladeira",
+      "quantidade": 1,
+      "vlrLance": 3999.99
     }
-  }  
+  ]     
 }
 ~~~
 
@@ -161,56 +159,84 @@ Detalhamento da mensagem JSON:
 **Oferta**
 Atributo | Descrição
 -------| --------
-number | número do pedido
-duoDate | data de vencimento
-total | valor total do pedido
-items | itens do pedido
+idOferta | número da oferta
+dtIniOferta | data de requisicao
+dtFimOferta | itens do pedido
+items | itens ofertados
 
 **Item**
 Atributo | Descrição
 -------| --------
 itemid | identificador do item
-quantity | quantidade do item
+nome | nome do item
+quantidade | quantidade do item
+vlrLance | valor da oferta
 
 
 ### Interface IProduto
 
-Interface para envio de dados do pedido com itens associados.
+Interface para comunicação entre `Leilao` e `Produto`, utilizada pelo componente `Leilao` para início do processo de validação de disponibilidade de um produto e pelo componente `Produto` para retorno de detalhes e lista de fornecedores.
 
-**Tópico**: `pedido/{id}/dados`
+**Tópico**: `leilao/{idLeilao}/buscaProduto`
 
-Classes que representam objetos JSON associados às mensagens da interface:
-
-![Diagrama Classes REST](images/diagrama-classes-rest.png)
+![Consulta de Produto](images/classe_iproduto_consulta.png)
 
 ~~~json
 {
-  "number": 16,
-  "duoDate": "2009-10-04",
-  "total": 1937.01,
-  "items": {
-    "item": {
-       "itemid": "1245",
-       "quantity": 1
-    },
-    "item": {
-       "itemid": "1321",
-       "quantity": 1
-    }
-  }  
+  "idLeilao": "000001",
+  "produtoDesejado": "Geladeira",
 }
 ~~~
 
 Detalhamento da mensagem JSON:
 
+**Consulta**  
+
+Atributo | Descrição
+-------| --------
+idLeilao | número do leilão que requisitou o produto
+produtoDesejado | palavras chave para localização do produto
+
+**Tópico**: `produto/{idLeilao}/{idProduto}`
+
+![Retorno de Produto](images/classe_iproduto_retorno.png)
+
+~~~json
+{
+  "idLeilao": "000001",
+  "produto": {
+    "idProduto": "0123",
+    "nome": "Geladeira"
+  },
+  "fornecedores": [
+    { "idFornecedore": "001", "nome": "Brastemp" },
+    { "idFornecedore": "002", "nome": "Lojas 100" },
+    { "idFornecedore": "003", "nome": "Eletro Norte" },
+    { "idFornecedore": "004", "nome": "Cibelar" },
+  ]
+}
+~~~
+
+Detalhamento da mensagem JSON:
+
+**Retorno**
+Atributo | Descrição
+-------| --------
+idLeilao | número do leilão que requisitou o produto
+produto | detalhes do produto solicitado
+fornecedores | listagem dos fornecedores do produto
+
 **Produto**
 Atributo | Descrição
 -------| --------
-number | número do pedido
-duoDate | data de vencimento
-total | valor total do pedido
-items | itens do pedido
+idProduto | número único do produto
+nome | nome do produto normalizado
 
+**Fornecedor**
+Atributo | Descrição
+-------| --------
+idFornecedor | número único do fornecedor
+nome | nome do fornecedor cadastrado no sistema
 
 # Nível 2
 
