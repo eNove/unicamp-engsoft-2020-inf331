@@ -274,7 +274,7 @@ As interfaces listadas são detalhadas a seguir:
 
 ### Interface `ITemplate`
 
-![Diagrama da Interface](images/diagrama-Itemplate.jpg)
+![Diagrama da Interface](images/diagrama-uml-itemplate.jpg)
 
 > A Interface Itemplate reune um montante de informacoes que sao importantes para o fornecedor e que podem ser gerenciadas em sua maioria pelo proprio model do fornecedor. Utilizada para se comunicar para com a view.
 
