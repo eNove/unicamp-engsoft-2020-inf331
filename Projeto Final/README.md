@@ -33,25 +33,25 @@ Apresente um diagrama conforme o modelo a seguir:
 
 > <Componente responsável pela iteração entre cliente e os leilões que ocorrem sobre o produto em que o cliente demonstra interesse. Recebe as atualizações dos lances realizados e comunica o cliente sobre os lances e os produtos disponíveis.> 
 
-![Componente](diagrama-componente-mensagens.png)
+![Componente](barramento-c_Comprador.png)
 
 ### Componente `Produto`
 
 > <Componente responsável por avaliar a disponibilidade dos produtos que irão entrar em leilão. Devolve lista de fornecedores que comercializam o produto e código do produto requisitado para leilão.>
 
-![Componente](diagrama-componente-mensagens.png)
+![Componente](barramento-c_Produto.png)
 
 ### Componente `Fornecedor`
 
 > <Fornecedor é acionado pelo Componente leilão, que informa o código do produto que irá entrar em leilão, avalia a quantidade de produtos disponíveis para leilão e realiza o lance do produto desejado pelo comprador.>
 
-![Componente](diagrama-componente-mensagens.png)
+![Componente](barramento-c_Fornecedor.png)
 
 ### Componente `Leilao`
 
 > <O Componente Leilão é o orquestrador de todo o leilão que é relaizado. É o componente responsável por receber os interesses do componente Comprador, verifica a disponibilidade dos produtos, aciona a lista de fornecedores que comercializão o produto que irá para leilão. Recebe todos os lances realizados pelos fornecedores e encaminha para o comprador.>
 
-![Componente](diagrama-componente-mensagens.png)
+![Componente](barramento-c_Leilao.png)
 
 ## A seguir temos as interfaces uitlizadas:
 
