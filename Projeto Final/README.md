@@ -121,11 +121,11 @@ Atributo | Descrição
 ------- | --------
 idLeilao | Identificação do leilão
 fornecedores | Array com lista de fornecedores
-	idFornecedore | Identificação do fornecedor
-	nome | Nome do fornecedor
+idFornecedore | Identificação do fornecedor
+nome | Nome do fornecedor
 produto | Objeto de produto
-	idProduto | Identificação do Produto
-	nome | Nome do Produto
+idProduto  | Identificação do Produto
+nome | Nome do Produto
 
 
 ### Interface IOferta
