@@ -207,7 +207,7 @@ Apresente aqui o detalhamento do Nível 2 conforme detalhado na especificação 
 
 Apresente um diagrama conforme o modelo a seguir:
 
-> ![Modelo de diagrama no nível 2](images/diagrama-subcomponentes.png)
+> ![Diagrama de subcomponentes](images/diagrama-subcomponentes.png)
 
 ### Detalhamento da interação de componentes
 
