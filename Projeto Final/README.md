@@ -279,9 +279,9 @@ As interfaces listadas são detalhadas a seguir:
 
 ## Detalhamento das Interfaces
 
-### Interface `<nome da interface>`
+### Interface `ITemplate`
 
-> ![Diagrama da Interface](images/diagrama-interface-itableproducer.png)
+> ![Diagrama da Interface](images/diagrama-Itemplate.jpg)
 
 > <Resumo do papel da interface.>
 
