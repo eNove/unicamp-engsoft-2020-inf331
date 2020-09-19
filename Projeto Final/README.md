@@ -159,49 +159,6 @@ Atributo | Descrição
 itemid | identificador do item
 quantity | quantidade do item
 
-### Interface ILance
-
-Interface para envio de dados do pedido com itens associados.
-
-**Tópico**: `pedido/{id}/dados`
-
-Classes que representam objetos JSON associados às mensagens da interface:
-
-![Diagrama Classes REST](images/diagrama-classes-rest.png)
-
-~~~json
-{
-  "number": 16,
-  "duoDate": "2009-10-04",
-  "total": 1937.01,
-  "items": {
-    "item": {
-       "itemid": "1245",
-       "quantity": 1
-    },
-    "item": {
-       "itemid": "1321",
-       "quantity": 1
-    }
-  }  
-}
-~~~
-
-Detalhamento da mensagem JSON:
-
-**Lance**
-Atributo | Descrição
--------| --------
-number | número do pedido
-duoDate | data de vencimento
-total | valor total do pedido
-items | itens do pedido
-
-**Item**
-Atributo | Descrição
--------| --------
-itemid | identificador do item
-quantity | quantidade do item
 
 ### Interface IProduto
 
