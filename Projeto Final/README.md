@@ -314,6 +314,12 @@ Método | Objetivo
 
 # Multiplas Interfaces
 
-> Escreva um texto detalhando como seus componentes  podem ser preparados para que seja possível trocar de interface apenas trocando o componente View e mantendo o Model e Controller.
->
-> É recomendado a inserção de, pelo menos, um diagrama que deve ser descrito no texto. O formato do diagrama é livre e deve ilustrar a arquitetura proposta.
+No desenho da arquitetura foi utilizado MVC e a interface ITemplate que será utilizada para definição dos objetos de comunicação entre os controllers e as diversas implementações de interface.
+
+Para possibilitar o chaveamento das Views para as plataformas Web e Mobile será utilizado o design pattern abstract factory.
+
+A seguir segue o diagrama do componente `ListaOfertaFornecedores` que exemplifica essa implementação.
+
+Neste diagrama temos a interface `IInterfaceComponentFactory` que define os métodos de factory de componentes para utilização nas diversas implementações concretas, exemplificadas no diagrama para web e mobile pelas classes concretas `WebComponentFactory` e `MobileComponentFactory`. As classes concretas são responsáveis, através da implementação de `IInterfaceComponentFactory`, por definir os métodos necessários para criar os componentes em suas plataformas específicas.
+
+![Multiplas Interfaces](images/multilplas_interfaces.png)
