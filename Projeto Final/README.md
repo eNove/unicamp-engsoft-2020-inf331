@@ -136,16 +136,16 @@ Interface que faz o envio de dados do "lance" ofertado pelo orquestrador ILeilao
 
 **Tópico**: `oferta/{idLeilao}/{idOferta}`
 
-![Diagrama Classes REST](images/diagrama-classes-rest.png)
+![Diagrama Classes REST](images/classe_ioferta.png)
 
 ~~~json
 {
-  "idOferta": 000001,
+  "idOferta": "000001",
   "dtIniOferta": "2020-09-18T21:20:00Z",
   "dtFimOferta": "2020-09-20T21:20:00Z",
-  "items": [
+  "produtos": [
     {
-      "itemid": "0123",
+      "idProduto": "0123",
       "nome": "Geladeira",
       "quantidade": 1,
       "vlrLance": 3999.99
@@ -162,12 +162,12 @@ Atributo | Descrição
 idOferta | número da oferta
 dtIniOferta | data de requisicao
 dtFimOferta | itens do pedido
-items | itens ofertados
+produtos | itens ofertados
 
 **Item**
 Atributo | Descrição
 -------| --------
-itemid | identificador do item
+idProduto | identificador do item
 nome | nome do item
 quantidade | quantidade do item
 vlrLance | valor da oferta
