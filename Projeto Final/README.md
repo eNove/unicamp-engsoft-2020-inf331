@@ -277,7 +277,6 @@ Para cada componente será apresentado um documento conforme o modelo a seguir:
 **Interfaces**
 > * ILeilao (ja especificada)
 > * ITemplate
-> * ISessao
 
 As interfaces listadas são detalhadas a seguir:
 
