@@ -117,29 +117,27 @@ quantity | quantidade do item
 
 ### Interface IOferta
 
-Interface para envio de dados do pedido com itens associados.
+Interface que faz o envio de dados do "lance" ofertado pelo orquestrador ILeilao recebido pelo Fornecedor.
 
-**Tópico**: `pedido/{id}/dados`
+**Tópico**: `oferta/{idLeilao}/{idOferta}/menorPreco` 
 
-Classes que representam objetos JSON associados às mensagens da interface:
+**Tópico**: `oferta/{idLeilao}/{idOferta}`
 
 ![Diagrama Classes REST](images/diagrama-classes-rest.png)
 
 ~~~json
 {
-  "number": 16,
-  "duoDate": "2009-10-04",
-  "total": 1937.01,
+  "idOferta": 000001,
+  "dtIniOferta": "2020-09-18T21:20:00Z",
+  "dtFimOferta": "2020-09-20T21:20:00Z",
   "items": {
     "item": {
-       "itemid": "1245",
-       "quantity": 1
-    },
-    "item": {
-       "itemid": "1321",
-       "quantity": 1
+       "itemid": "0123",
+       "nome": "Geladeira"
+       "quantidade": 1
+       "vlrLance" : 3999.99,
     }
-  }  
+  }     
 }
 ~~~
 
@@ -148,16 +146,18 @@ Detalhamento da mensagem JSON:
 **Oferta**
 Atributo | Descrição
 -------| --------
-number | número do pedido
-duoDate | data de vencimento
-total | valor total do pedido
-items | itens do pedido
+idOferta | número da oferta
+dtIniOferta | data de requisicao
+dtFimOferta | itens do pedido
+items | itens ofertados
 
 **Item**
 Atributo | Descrição
 -------| --------
 itemid | identificador do item
-quantity | quantidade do item
+nome | nome do item
+quantidade | quantidade do item
+vlrLance | valor da oferta
 
 
 ### Interface IProduto
