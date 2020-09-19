@@ -260,6 +260,10 @@ O detalhamento deve seguir um formato de acordo com o exemplo a seguir:
 * Os componentes `Solicita Estoque` e `Solicita Compra` se comunicam com componentes externos pelo barramento:
   * Para consultar o estoque, o componente `Solicita Estoque` publica no barramento uma mensagem de tópico "`produto/<id>/estoque/consulta`" através da interface `Consulta Estoque` e assina mensagens de tópico "`produto/<id>/estoque/status`" através da interface `Posição Estoque` que retorna a disponibilidade do produto.
 
+## Diagrama UML 
+
+> ![Diagrama de UML](images/diagrama_classes_nivel_2.jpg)
+
 Para cada componente será apresentado um documento conforme o modelo a seguir:
 
 ## Componente `<Nome do Componente>`
