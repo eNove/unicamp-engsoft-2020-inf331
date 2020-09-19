@@ -112,6 +112,9 @@ produtoDesejado | Identificador do produto desejado pelo comprador
     "produto": {
         "idProduto": "0123",
         "nome": "Geladeira"
+    },
+    "oferta_menor_preco":{
+      "valor": 00.00
     }
 }
 ~~~
